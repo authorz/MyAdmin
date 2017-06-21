@@ -1,0 +1,1 @@
+<td><?= date('Y-m-d H:i',$item[$column['value']]) ?></td>
