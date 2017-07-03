@@ -105,7 +105,7 @@
                     <!-- Sidebar Navigation -->
                     <ul class="sidebar-nav">
                         <li>
-                            <a href="/admin/index" @if(Request::path() == 'admin/index') class="active" @endif><i
+                            <a href="/admin/system/index" @if(Request::path() == 'admin/system/index') class="active" @endif><i
                                         class="gi gi-compass sidebar-nav-icon"></i><span
                                         class="sidebar-nav-mini-hide">控制台</span></a>
                         </li>

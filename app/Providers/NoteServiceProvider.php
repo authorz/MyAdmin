@@ -2,6 +2,7 @@
 
     namespace App\Providers;
 
+    use App\Libarary\NodeFunc;
     use App\Model\Module;
     use Illuminate\Support\Facades\Blade;
     use Illuminate\Support\Facades\Route;
@@ -12,52 +13,51 @@
 
     class NoteServiceProvider extends ServiceProvider
     {
+        protected $moduleModel;
+
+        public function __construct()
+        {
+            $this->moduleModel = new Module();
+        }
+
         /**
          * Bootstrap the application services.
          *
          * @return void
          */
-        public function boot(Request $request, Node $nodeModel, Module $module)
+        public function boot(Request $request, Node $nodeModel)
         {
+            $pathInfo = $request->path();
 
-            if ($request->getPathInfo() != '/') {
+            if (!$request->ajax() && !in_array($pathInfo, [
+                    '/'
+                ])
+            ) {
 
-                $path = explode('/', $request->getPathInfo())[2];
+                $moduleId = $this->moduleModel->moduleId(
+                    NodeFunc::moduleName($pathInfo)
+                );
 
-                $moduleId = $module->moduleId($path);
+                $nodeData = NodeFunc::node(
+                    $nodeModel::where('Module', NodeFunc::moduleId($moduleId->Id))->get()
+                );
 
-
-                if (empty($moduleId)) {
-
-                    $moduleId['Id'] = 0;
-                } else {
-
-                    $moduleId = (array)$moduleId;
-
-                }
-
-                $nodeData = $this->_getMenu($nodeModel::where('Module', $moduleId['Id'])->get());
-
-                $url = explode('/', $request->path());
-
-                unset($url[0], $url[1]);
-
-                $url = implode('/', array_merge($url));
+                $url = NodeFunc::url($pathInfo);
 
                 $nodeName = $nodeModel::where('Href', $url)->value('NodeName');
 
-                $module = $module->getAll();
-
-                View::share('moduleName', $path);
+                $module = $this->moduleModel->getAll();
 
                 View::share('nodeName', $nodeName);
 
                 View::share('nodeData', $nodeData);
 
+                View::share('moduleName', NodeFunc::moduleName($pathInfo));
+
                 View::share('moduleData', $module);
 
-            }
 
+            }
 
         }
 
@@ -72,32 +72,4 @@
             //
         }
 
-        public function _getMenu($list, $pk = 'Id', $pid = 'Pid', $child = "children", $root = 0)
-        {
-
-            $tree = [];
-
-            foreach ($list as $key => $value) {
-
-                if ($value[$pid] == $root) {
-
-                    unset($list[$key]);
-
-                    if (!empty($list)) {
-
-                        $child = $this->_getMenu($list, $pk, $pid, $child, $value[$pk]);
-
-                        if (!empty($child)) {
-                            $value['children'] = $child;
-                        }
-                    }
-
-                    $tree[] = $value;
-
-                }
-
-            }
-            return $tree;
-
-        }
     }
