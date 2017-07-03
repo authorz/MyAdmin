@@ -59,7 +59,7 @@ class NodeController extends Controller
             $builder->setSubWay('post')->setFormUrl();
 
             $builder
-                ->addFormItem(['name' => 'redirect', 'type' => 'hidden', 'value' => '/admin/node'])
+                ->addFormItem(['name' => 'redirect', 'type' => 'hidden', 'value' => '/admin/system/node'])
                 ->addFormItem(['name' => 'Id', 'type' => 'hidden', 'value' => $result['Id']])
                 ->addFormItem(['name' => 'Pid', 'value' => $result['Pid'], 'title' => '上级节点', 'type' => 'select', 'parameter' => $nodeModel->selectNode()])
                 ->addFormItem(['name' => 'NodeName', 'value' => $result['NodeName'], 'title' => '节点名称', 'type' => 'text'])
@@ -87,6 +87,7 @@ class NodeController extends Controller
             $node->Href = $request->input('Href','');
             $node->Sort = $request->input('Sort');
             $node->State = $request->input('State');
+            $node->Module = $request->input('Module');
 
             if ($node->save()) {
                 return response()->json(['message' => '添加成功', 'code' => 200]);
@@ -101,6 +102,7 @@ class NodeController extends Controller
 
             $builder
                 ->addFormItem(['name' => 'redirect', 'type' => 'hidden', 'value' => '/admin/node'])
+                ->addFormItem(['name' => 'Module', 'type' => 'hidden', 'value' => $_GET['Id']])
                 ->addFormItem(['name' => 'Pid', 'title' => '上级节点', 'type' => 'select', 'parameter' => $nodeModel->selectNode()])
                 ->addFormItem(['name' => 'NodeName', 'title' => '节点名称', 'type' => 'text'])
                 ->addFormItem(['name' => 'Icon', 'title' => '节点图标', 'type' => 'text'])

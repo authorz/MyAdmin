@@ -76,7 +76,7 @@ var ReadyLogin = function () {
                                     icon: 'success',
                                     hideAfter: 1000,
                                     afterHidden: function () {
-                                        location.href = '/admin/index';
+                                        location.href = '/admin/system/index';
                                     }
                                 });
                             }

@@ -24,7 +24,7 @@ trait Builders
             $list->setTableDataListKey('Id');
 
             $list
-                ->addTopButton(['name' => '新增', 'value' => 'create', 'url' => route($this->className . '.create'), 'type' => 'url'])
+                ->addTopButton(['name' => '新增', 'value' => 'create', 'url' => '/admin/infoclass/create', 'type' => 'url'])
                 ->addTopButton(['name' => '启用', 'value' => 'enable', 'url' => '/admin/infoclass/enable', 'type' => 'checkbox'])
                 ->addTopButton(['name' => '禁用', 'value' => 'disable', 'url' => '/admin/infoclass/disable', 'type' => 'checkbox'])
                 ->addTopButton(['name' => '删除', 'value' => 'delete', 'url' => '/admin/infoclass/destroy', 'type' => 'checkbox']);

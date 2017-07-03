@@ -14,7 +14,7 @@
         Route::get('/auth/error', 'Error\NoAuthController');
 
         # 后台管理
-        Route::group(['middleware' => 'Auth', 'prefix' => 'admin'], function () {
+        Route::group(['middleware' => 'Auth', 'prefix' => 'admin/{moduleName}'], function () {
 
             # 首页
             Route::get('index', 'IndexController')->name('index');
@@ -30,6 +30,7 @@
 
             # 登录日志
             Route::get('loginlog', 'LoginLogController@index');
+
 
             # 节点管理
             Route::get('node', 'NodeController@index')->name('node');
@@ -74,6 +75,7 @@
             Route::post('infoclass/disable', 'InfoClass\StateController@disable');
             Route::resource('infoclass', 'InfoClassController');
 
+
             #栏目分类
             Route::resource('maintype', 'MainTypeController');
 
@@ -85,6 +87,7 @@
             Route::post('diyfield/update', 'DiyFieldController@update');
             Route::post('diyfield/destroy', 'DiyFieldController@destroy');
             Route::resource('diyfield', 'DiyFieldController');
+
         });
 
 

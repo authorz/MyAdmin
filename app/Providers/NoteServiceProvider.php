@@ -1,70 +1,103 @@
 <?php
 
-namespace App\Providers;
+    namespace App\Providers;
 
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Http\Request;
-use App\Model\Node;
+    use App\Model\Module;
+    use Illuminate\Support\Facades\Blade;
+    use Illuminate\Support\Facades\Route;
+    use Illuminate\Support\Facades\View;
+    use Illuminate\Support\ServiceProvider;
+    use Illuminate\Http\Request;
+    use App\Model\Node;
 
-class NoteServiceProvider extends ServiceProvider
-{
-    /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
-    public function boot(Request $request, Node $nodeModel)
+    class NoteServiceProvider extends ServiceProvider
     {
-        $nodeData = $this->_getMenu($nodeModel::all());
+        /**
+         * Bootstrap the application services.
+         *
+         * @return void
+         */
+        public function boot(Request $request, Node $nodeModel, Module $module)
+        {
 
-        $nodeName = $nodeModel::where('Href', $request->path())->value('NodeName');
+            if ($request->getPathInfo() != '/') {
 
-        View::share('nodeName', $nodeName);
+                $path = explode('/', $request->getPathInfo())[2];
 
-        View::share('nodeData', $nodeData);
-
-
-    }
+                $moduleId = $module->moduleId($path);
 
 
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
+                if (empty($moduleId)) {
 
-    public function _getMenu($list, $pk = 'Id', $pid = 'Pid', $child = "children", $root = 0)
-    {
+                    $moduleId['Id'] = 0;
+                } else {
 
-        $tree = [];
+                    $moduleId = (array)$moduleId;
 
-        foreach ($list as $key => $value) {
-
-            if ($value[$pid] == $root) {
-
-                unset($list[$key]);
-
-                if (!empty($list)) {
-
-                    $child = $this->_getMenu($list, $pk, $pid, $child, $value[$pk]);
-
-                    if (!empty($child)) {
-                        $value['children'] = $child;
-                    }
                 }
 
-                $tree[] = $value;
+                $nodeData = $this->_getMenu($nodeModel::where('Module', $moduleId['Id'])->get());
+
+                $url = explode('/', $request->path());
+
+                unset($url[0], $url[1]);
+
+                $url = implode('/', array_merge($url));
+
+                $nodeName = $nodeModel::where('Href', $url)->value('NodeName');
+
+                $module = $module->getAll();
+
+                View::share('moduleName', $path);
+
+                View::share('nodeName', $nodeName);
+
+                View::share('nodeData', $nodeData);
+
+                View::share('moduleData', $module);
 
             }
 
-        }
-        return $tree;
 
+        }
+
+
+        /**
+         * Register the application services.
+         *
+         * @return void
+         */
+        public function register()
+        {
+            //
+        }
+
+        public function _getMenu($list, $pk = 'Id', $pid = 'Pid', $child = "children", $root = 0)
+        {
+
+            $tree = [];
+
+            foreach ($list as $key => $value) {
+
+                if ($value[$pid] == $root) {
+
+                    unset($list[$key]);
+
+                    if (!empty($list)) {
+
+                        $child = $this->_getMenu($list, $pk, $pid, $child, $value[$pk]);
+
+                        if (!empty($child)) {
+                            $value['children'] = $child;
+                        }
+                    }
+
+                    $tree[] = $value;
+
+                }
+
+            }
+            return $tree;
+
+        }
     }
-}

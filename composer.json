@@ -6,12 +6,13 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "doctrine/dbal": "^2.5",
+        "kherge/json": "^2.1",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "owasp/phprbac": "2.0.*@dev",
         "spatie/db-dumper": "^1.5",
-        "spatie/laravel-backup": "^3.11",
-        "zizaco/entrust": "5.2.x-dev"
+        "spatie/laravel-backup": "^3.11"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

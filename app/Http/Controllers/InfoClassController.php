@@ -24,6 +24,7 @@ class InfoClassController extends Controller
      */
     public function index()
     {
+
         $infoclass = InfoClass::getInfoClass();
 
         return $this->indexBuilder($infoclass->toArray()['data'], $infoclass->links());

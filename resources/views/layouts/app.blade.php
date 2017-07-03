@@ -121,7 +121,7 @@
                                 <ul>
                                     @foreach($node->children as $key=>$child)
                                         <li>
-                                            <a href="/{{$child->Href}}"
+                                            <a href="/admin/{{$moduleName}}/{{$child->Href}}"
                                                @if($NodeCrumb['href'] == ltrim($child->Href,'/')) class="active" @endif>{{$child->NodeName}}</a>
                                         </li>
                                     @endforeach
@@ -194,48 +194,19 @@
                     <!-- END Main Sidebar Toggle Button -->
 
                     <!-- Header Link -->
-                    <li class="hidden-xs animation-fadeInQuick">
-                        <a href="/admin/index">[&nbsp; <i class="fa fa-cubes"></i><strong>
-                                系统
-                            </strong> &nbsp;] </a>
 
-                    </li>
+                    @foreach($moduleData as $key=>$value)
+                        <li class="hidden-xs animation-fadeInQuick">
+                            <a href="/admin/{{strtolower($value->ModuleName)}}/index">[&nbsp; <i
+                                        class="{{$value->Icon}}"></i><strong>
+                                    {{$value->Title}}
+                                </strong> &nbsp;] </a>
 
-                    <li class="hidden-xs animation-fadeInQuick">
-                        <a href="/admin/index">[&nbsp; <i class="fa fa-cubes"></i><strong>
-                                一个新的模块
-                            </strong> &nbsp;] </a>
+                        </li>
 
-                    </li>
+                        @endforeach
 
-                    <li class="hidden-xs animation-fadeInQuick">
-                        <a href="/admin/index">[&nbsp; <i class="fa fa-cubes"></i><strong>
-                                又一个模块
-                            </strong> &nbsp;] </a>
-
-                    </li>
-                    <li class="hidden-xs animation-fadeInQuick">
-                        <a href="/admin/index">[&nbsp; <i class="fa fa-cubes"></i><strong>
-                                系统
-                            </strong> &nbsp;] </a>
-
-                    </li>
-
-                    <li class="hidden-xs animation-fadeInQuick">
-                        <a href="/admin/index">[&nbsp; <i class="fa fa-cubes"></i><strong>
-                                一个新的模块
-                            </strong> &nbsp;] </a>
-
-                    </li>
-
-                    <li class="hidden-xs animation-fadeInQuick">
-                        <a href="/admin/index">[&nbsp; <i class="fa fa-cubes"></i><strong>
-                                又一个模块
-                            </strong> &nbsp;] </a>
-
-                    </li>
-
-                    <!-- END Header Link -->
+                                <!-- END Header Link -->
                 </ul>
                 <!-- END Left Header Navigation -->
 

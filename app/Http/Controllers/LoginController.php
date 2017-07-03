@@ -9,7 +9,7 @@ class LoginController extends Controller
     public function index(Request $request)
     {
         if ($request->session()->has('UserLoginData.loginstate')) {
-            return redirect()->route('index');
+            return redirect('admin/system/index');
         } else {
             $request->session()->pull('UserLoginData.username');
             $request->session()->pull('UserLoginData.loginstate');

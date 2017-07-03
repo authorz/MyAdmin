@@ -34,7 +34,7 @@ class RoleController extends Controller
         $builder->addListData($role::all()->toArray());
 
         $builder
-            ->addRightButton(['class' => 'btn-success', 'name' => '编辑', 'value' => 'update', 'type' => FALSE, 'url' => '/admin/role/update', 'custom' => ['ID'], 'way' => 'get'])
+            ->addRightButton(['class' => 'btn-success', 'name' => '编辑', 'value' => 'update', 'type' => FALSE, 'url' => '/admin/system/role/update', 'custom' => ['ID'], 'way' => 'get'])
             ->addRightButton(['class' => 'btn-info', 'name' => '启用', 'value' => 'enable', 'type' => TRUE, 'url' => '/admin/node/enable', 'custom' => ['Id'], 'way' => 'post'])
             ->addRightButton(['class' => 'btn-danger', 'name' => '禁用', 'value' => 'disable', 'type' => TRUE, 'url' => '/admin/node/disable', 'custom' => ['Id'], 'way' => 'post'])
             ->addRightButton(['class' => 'btn-primary', 'name' => '删除', 'value' => 'delete', 'type' => TRUE, 'url' => '/admin/node/delete', 'custom' => ['Id'], 'way' => 'post']);
@@ -94,7 +94,7 @@ class RoleController extends Controller
 
             $tree = [];
 
-            $allNode = $node->getAllNode();
+            $allNode = $node->getAllNode(-1);
 
             $permissions = $rolePermissions->getPermissions($request->input('ID'));
 
