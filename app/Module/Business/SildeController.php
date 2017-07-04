@@ -11,7 +11,7 @@
 
     use App\Builder;
 
-    class IndexController extends Controller
+    class SildeController extends Controller
     {
         public function index()
         {

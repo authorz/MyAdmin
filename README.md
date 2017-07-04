@@ -40,6 +40,10 @@ php artisan create:module <moduleName>
 code ...
 ```
 ### 使用方式
+* 路由设定 : routes/module.php
+* 数据表规范 : myadmin_<模块名称>_物理名称
+* 链接其他库 : config/database.php 添加库
+* 所有文件命名空间 : ```namespace App\Module\<模块名称>;```
 
 
 # MyBuilder PHP 构建器

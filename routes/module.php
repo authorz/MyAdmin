@@ -4,10 +4,7 @@
         // 需要验证写这里
         Route::group(['middleware' => 'Auth', 'prefix' => 'admin/{moduleName}'], function () {
 
-
-            Route::get('silde', 'Business\IndexController@index');
-
-
+            Route::get('silde', 'Business\SildeController@index');
 
         });
         // 不需要验证写这里
