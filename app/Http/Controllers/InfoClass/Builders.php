@@ -8,6 +8,7 @@
     namespace App\Http\Controllers\InfoClass;
 
     use App\Builder\Builder;
+    use App\Libarary\UrlFunc;
     use App\Model\MainType;
 
     trait Builders
@@ -24,15 +25,17 @@
                 $list->setTableDataListKey('Id');
 
                 $list
-                    ->addTopButton(['name' => '新增', 'value' => 'create', 'url' => '/admin/infoclass/create', 'type' => 'url'])
-                    ->addTopButton(['name' => '启用', 'value' => 'enable', 'url' => '/admin/infoclass/enable', 'type' => 'checkbox'])
-                    ->addTopButton(['name' => '禁用', 'value' => 'disable', 'url' => '/admin/infoclass/disable', 'type' => 'checkbox'])
-                    ->addTopButton(['name' => '删除', 'value' => 'delete', 'url' => '/admin/infoclass/destroy', 'type' => 'checkbox']);
+                    ->addTopButton(['name' => '新增', 'value' => 'create', 'url' => UrlFunc::jumpUrl('infoclass/create'), 'type' => 'url'])
+                    ->addTopButton(['name' => '启用', 'value' => 'enable', 'url' => UrlFunc::jumpUrl('infoclass/enable'), 'type' => 'checkbox'])
+                    ->addTopButton(['name' => '禁用', 'value' => 'disable', 'url' => UrlFunc::jumpUrl('infoclass/disable'), 'type' => 'checkbox'])
+                    ->addTopButton(['name' => '删除', 'value' => 'delete', 'url' => UrlFunc::jumpUrl('infoclass/destroy'), 'type' => 'checkbox']);
 
                 $list
                     ->addTableColumn(['name' => 'Id', 'value' => 'Id', 'type' => 'default'])
                     ->addTableColumn(['name' => '栏目名称', 'value' => 'Title', 'type' => 'default'])
-                    ->addTableColumn(['name' => '类型', 'value' => 'Type', 'type' => 'default'])
+                    ->addTableColumn(['name' => '类型', 'value' => 'Type', 'type' => 'state', 'extend' => [
+                        'param' => MainType::getMainTypeList()
+                    ]])
                     ->addTableColumn(['name' => '排序', 'value' => 'sort', 'type' => 'default'])
                     ->addTableColumn(['name' => '状态', 'value' => 'hide', 'type' => 'default'])
                     ->addTableColumn(['name' => '操作', 'type' => 'btn']);
@@ -42,10 +45,10 @@
                 $list->page($page);
 
                 $list
-                    ->addRightButton(['class' => 'btn-success', 'name' => '编辑', 'value' => 'update', 'type' => FALSE, 'url' => '/admin/infoclass/edit', 'custom' => ['Id'], 'way' => 'get'])
-                    ->addRightButton(['class' => 'btn-info', 'name' => '启用', 'value' => 'enable', 'type' => TRUE, 'url' => '/admin/infoclass/enable', 'custom' => ['Id'], 'way' => 'post'])
-                    ->addRightButton(['class' => 'btn-danger', 'name' => '禁用', 'value' => 'disable', 'type' => TRUE, 'url' => '/admin/infoclass/disable', 'custom' => ['Id'], 'way' => 'post'])
-                    ->addRightButton(['class' => 'btn-primary', 'name' => '删除', 'value' => 'delete', 'type' => TRUE, 'url' => '/admin/infoclass/destroy', 'custom' => ['Id'], 'way' => 'post']);
+                    ->addRightButton(['class' => 'btn-success', 'name' => '编辑', 'value' => 'update', 'type' => FALSE, 'url' => UrlFunc::jumpUrl('infoclass/edit'), 'custom' => ['Id'], 'way' => 'get'])
+                    ->addRightButton(['class' => 'btn-info', 'name' => '启用', 'value' => 'enable', 'type' => TRUE, 'url' => UrlFunc::jumpUrl('infoclass/enable'), 'custom' => ['Id'], 'way' => 'post'])
+                    ->addRightButton(['class' => 'btn-danger', 'name' => '禁用', 'value' => 'disable', 'type' => TRUE, 'url' => UrlFunc::jumpUrl('infoclass/disable'), 'custom' => ['Id'], 'way' => 'post'])
+                    ->addRightButton(['class' => 'btn-primary', 'name' => '删除', 'value' => 'delete', 'type' => TRUE, 'url' => UrlFunc::jumpUrl('infoclass/destroy'), 'custom' => ['Id'], 'way' => 'post']);
 
                 return $list;
             };
@@ -91,7 +94,7 @@
 
                 $form
                     ->setSubWay('post')
-                    ->setFormUrl('/admin/infoclass/update');
+                    ->setFormUrl(UrlFunc::jumpUrl('infoclass/update'));
 
                 $form
                     ->addFormItem(['name' => 'redirect', 'type' => 'hidden', 'value' => route($this->className . '.index')])

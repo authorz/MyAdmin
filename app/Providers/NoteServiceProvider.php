@@ -48,6 +48,8 @@
 
                 $module = $this->moduleModel->getAll();
 
+
+
                 View::share('nodeName', $nodeName);
 
                 View::share('nodeData', $nodeData);

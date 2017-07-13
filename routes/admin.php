@@ -14,7 +14,7 @@
         Route::get('/auth/error', 'Error\NoAuthController');
 
         # 后台管理
-        Route::group(['middleware' => 'Auth', 'prefix' => 'admin/{moduleName}'], function () {
+        Route::group(['middleware' => 'Auth', 'prefix' => 'admin/system'], function () {
 
             # 首页
             Route::get('index', 'IndexController')->name('index');
@@ -80,13 +80,34 @@
             Route::resource('maintype', 'MainTypeController');
 
             #单页信息
-            Route::resource('info', 'InfoController');
+            Route::get('info', 'InfoController@index');
+            Route::any('info/edit', 'InfoController@edit');
+
+            #列表信息
+            Route::get('infolist', 'InfoListController@index');
+            Route::any('infolist/create', 'InfoListController@create');
+            Route::any('infolist/edit', 'InfoListController@edit');
+
+            #图片信息
+            Route::get('infoimg', 'InfoImgController@index');
+
+            #文件信息
+            Route::get('infofile', 'InfoFileController@index');
+            #自定义模型
+            Route::get('diymodel', 'DiyModelController@index');
+            Route::get('module', 'ModuleController@index');
+            Route::get('log', 'LogController@index');
+            Route::get('systemdata', 'SystemDataController@index');
+            Route::get('treedata', 'TreeDataController@index');
+            Route::get('firend', 'FirendController@index');
+            Route::get('webmenu', 'WebMenuController@index');
 
             #自定义字段
             Route::get('diyfield/edit', 'DiyFieldController@edit');
             Route::post('diyfield/update', 'DiyFieldController@update');
             Route::post('diyfield/destroy', 'DiyFieldController@destroy');
             Route::resource('diyfield', 'DiyFieldController');
+
 
         });
 

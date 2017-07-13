@@ -65,7 +65,7 @@
                     @include('layouts.theme')
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-effect-ripple btn-primary">更新配色</button>
+                    <button type="button" class="btn btn-effect-ripple btn-primary updateTheme">更新配色</button>
                     <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">关闭</button>
                 </div>
 
@@ -105,7 +105,7 @@
                     <!-- Sidebar Navigation -->
                     <ul class="sidebar-nav">
                         <li>
-                            <a href="/admin/system/index" @if(Request::path() == 'admin/system/index') class="active" @endif><i
+                            <a href="/{{Request::path()}}" @if(Request::path() == 'admin/system/index' || Request::path() == 'admin/system/index') class="active" @endif><i
                                         class="gi gi-compass sidebar-nav-icon"></i><span
                                         class="sidebar-nav-mini-hide">控制台</span></a>
                         </li>
@@ -122,7 +122,7 @@
                                     @foreach($node->children as $key=>$child)
                                         <li>
                                             <a href="/admin/{{$moduleName}}/{{$child->Href}}"
-                                               @if($NodeCrumb['href'] == ltrim($child->Href,'/')) class="active" @endif>{{$child->NodeName}}</a>
+                                               @if($NodeCrumb['href'] == ltrim($child->Href,'/') && ($NodeCrumb['moduleId'] == $node['Module'])) class="active" @endif>{{$child->NodeName}}</a>
                                         </li>
                                     @endforeach
 
@@ -294,6 +294,7 @@
 <script src="/plugin/toast/src/jquery.toast.js"></script>
 <script src="/core/readyLogout.js"></script>
 <script src="/core/myData.js"></script>
+<script src="/core/updateTheme.js"></script>
 
 @section('scripts')
 

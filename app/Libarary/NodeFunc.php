@@ -52,7 +52,12 @@
 
             $path = array_slice($url, 1, 1);
 
-            return $path[0];
+            if (count($path) > 0) {
+                return $path[0];
+            } else {
+                return '/';
+            }
+
         }
 
         /**

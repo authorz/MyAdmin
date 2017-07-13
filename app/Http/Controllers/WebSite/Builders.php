@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\WebSite;
 
 use App\Builder\Builder;
+use App\Libarary\UrlFunc;
 
 
 trait Builders
@@ -20,7 +21,7 @@ trait Builders
 
             $list->setNav($data['siteClass'], 'id');
 
-            $list->setSubWay('post')->setFormUrl('/admin/website/store');
+            $list->setSubWay('post')->setFormUrl(UrlFunc::jumpUrl('website/store'));
 
             foreach ($field as $key => $value) {
                 $list->addFormItem(['name' => $value->Name, 'title' => $value->Title, 'type' => 'text', 'value' => $data['siteList'][$value->Name]->Value]);

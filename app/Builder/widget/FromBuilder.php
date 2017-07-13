@@ -109,6 +109,8 @@ class FromBuilder extends From
     public function upload($uploadConfig)
     {
         self::$uploadConfig = $uploadConfig;
+
+        return $this;
     }
 
     public function setNav($nav, $navPrefix)

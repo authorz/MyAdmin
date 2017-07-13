@@ -9,6 +9,11 @@
         overwriteInitial: false,
         initialPreviewAsData: true,
         deleteUrl: '{{$uploadConfig['delete_url']}}',
+        ajaxSettings: {
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        },
         initialPreview: [
             @foreach($item['parameter'] as $key=>$upload)
                     "{{$upload['url']}}",
@@ -42,8 +47,7 @@
         var form = data.form, files = data.files, extra = data.extra,
                 response = data.response, reader = data.reader;
 
-        $('form').append('<input type="hidden" value="' + response['key'] + '" name="{{$item['name']}}[]">');
-        console.log(response['key']);
+        $('form').append('<input type="hidden" value="' + response['key'] + '" name="{{$item['name']}}">');
 
 
     });

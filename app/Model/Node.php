@@ -113,11 +113,11 @@
          * 查找最上级节点ID,用于打开一级节点菜单 class = open
          * @author CrazyCodes
          */
-        public function getParentNode($id = 0, $title = 'Id')
+        public function getParentNode($id = 0, $title = 'Id',$module = 1)
         {
             global $parentId;
 
-            $data = self::where($title, $id)->first();
+            $data = self::where($title, $id)->where('Module',$module)->first();
 
             if ($data->Pid) {
                 $this->getParentNode($data->Pid);

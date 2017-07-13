@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserPost;
+use App\Libarary\UrlFunc;
 use App\Model\Role;
 use App\Model\User;
 use App\Model\UserRole;
@@ -33,10 +34,10 @@ class UserController extends Controller
         $builder->setTableDataListKey('ID');
 
         $builder
-            ->addTopButton(['name' => '新增', 'value' => 'add', 'url' => '/admin/user/add', 'type' => 'url'])
-            ->addTopButton(['name' => '启用', 'value' => 'enable', 'url' => '/admin/user/enable', 'type' => 'checkbox'])
-            ->addTopButton(['name' => '禁用', 'value' => 'disable', 'url' => '/admin/user/disable', 'type' => 'checkbox'])
-            ->addTopButton(['name' => '删除', 'value' => 'delete', 'url' => '/admin/user/delete', 'type' => 'checkbox']);
+            ->addTopButton(['name' => '新增', 'value' => 'add', 'url' => UrlFunc::jumpUrl('user/add'), 'type' => 'url'])
+            ->addTopButton(['name' => '启用', 'value' => 'enable', 'url' => UrlFunc::jumpUrl('user/enable'), 'type' => 'checkbox'])
+            ->addTopButton(['name' => '禁用', 'value' => 'disable', 'url' => UrlFunc::jumpUrl('user/disable'), 'type' => 'checkbox'])
+            ->addTopButton(['name' => '删除', 'value' => 'delete', 'url' => UrlFunc::jumpUrl('user/delete'), 'type' => 'checkbox']);
 
 
         $builder
@@ -50,11 +51,11 @@ class UserController extends Controller
         $builder->addListData($users->toArray()['data']);
 
         $builder
-            ->addRightButton(['class' => 'btn-danger', 'name' => '绑定角色', 'value' => 'bind', 'type' => FALSE, 'url' => '/admin/user/bind', 'custom' => ['ID'], 'way' => 'get'])
-            ->addRightButton(['class' => 'btn-success', 'name' => '编辑', 'value' => 'update', 'type' => FALSE, 'url' => '/admin/user/update', 'custom' => ['ID'], 'way' => 'get'])
-            ->addRightButton(['class' => 'btn-info', 'name' => '启用', 'value' => 'enable', 'type' => TRUE, 'url' => '/admin/user/enable', 'custom' => ['ID'], 'way' => 'post'])
-            ->addRightButton(['class' => 'btn-danger', 'name' => '禁用', 'value' => 'disable', 'type' => TRUE, 'url' => '/admin/user/disable', 'custom' => ['ID'], 'way' => 'post'])
-            ->addRightButton(['class' => 'btn-primary', 'name' => '删除', 'value' => 'delete', 'type' => TRUE, 'url' => '/admin/user/delete', 'custom' => ['ID'], 'way' => 'post']);
+            ->addRightButton(['class' => 'btn-danger', 'name' => '绑定角色', 'value' => 'bind', 'type' => FALSE, 'url' => UrlFunc::jumpUrl('user/bind'), 'custom' => ['ID'], 'way' => 'get'])
+            ->addRightButton(['class' => 'btn-success', 'name' => '编辑', 'value' => 'update', 'type' => FALSE, 'url' => UrlFunc::jumpUrl('user/update'), 'custom' => ['ID'], 'way' => 'get'])
+            ->addRightButton(['class' => 'btn-info', 'name' => '启用', 'value' => 'enable', 'type' => TRUE, 'url' => UrlFunc::jumpUrl('user/enable'), 'custom' => ['ID'], 'way' => 'post'])
+            ->addRightButton(['class' => 'btn-danger', 'name' => '禁用', 'value' => 'disable', 'type' => TRUE, 'url' => UrlFunc::jumpUrl('user/disable'), 'custom' => ['ID'], 'way' => 'post'])
+            ->addRightButton(['class' => 'btn-primary', 'name' => '删除', 'value' => 'delete', 'type' => TRUE, 'url' => UrlFunc::jumpUrl('user/delete'), 'custom' => ['ID'], 'way' => 'post']);
 
         $builder->page($users->links());
 
@@ -87,7 +88,7 @@ class UserController extends Controller
 
             $builder
                 ->addFormItem([
-                    'name' => 'redirect', 'type' => 'hidden', 'value' => '/admin/user'
+                    'name' => 'redirect', 'type' => 'hidden', 'value' => UrlFunc::jumpUrl('user')
                 ])
                 ->addFormItem([
                     'name' => 'roleId', 'title' => '绑定角色', 'type' => 'select', 'value' => $roleId, 'parameter' => $role->getRole()
@@ -103,10 +104,10 @@ class UserController extends Controller
     {
         $builder = Builder\Builder::forms();
 
-        $builder->setSubWay('post')->setFormUrl('isadd');
+        $builder->setSubWay('post')->setFormUrl(UrlFunc::jumpUrl('user/isadd'));
 
         $builder
-            ->addFormItem(['name' => 'redirect', 'type' => 'hidden', 'value' => '/admin/user'])
+            ->addFormItem(['name' => 'redirect', 'type' => 'hidden', 'value' => UrlFunc::jumpUrl('user')])
             ->addFormItem(['name' => 'Name', 'title' => '用户名', 'type' => 'text'])
             ->addFormItem(['name' => 'Email', 'title' => '邮箱', 'type' => 'text'])
             ->addFormItem(['name' => 'PassWord', 'title' => '登录密码', 'type' => 'password'])

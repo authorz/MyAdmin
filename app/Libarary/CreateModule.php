@@ -45,7 +45,26 @@
 
             $result = Storage::disk('module')->put($moduleName . '/config.json', $json->encode($config));
 
+            $this->touchRouteFile($moduleName);
+
             return $result;
+        }
+
+        public function touchRouteFile($moduleName)
+        {
+            Storage::disk('module')->put($moduleName . '/' . $moduleName . 'Route.php',"<?php
+    namespace App\\Module\\{$moduleName};
+
+    use Illuminate\\Support\\Facades\\Route;
+
+    class {$moduleName}Route
+    {
+        public static function _init()
+        {
+
+        }
+    }
+            ");
         }
 
     }

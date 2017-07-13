@@ -98,12 +98,12 @@
                                         @include('builder.widget.btn')
                                     @elseif($col['type'] == 'date')
                                         @include('builder.widget.date')
-                                        {{--@elseif($col['type'] == 'url')--}}
-                                        {{--@include('builder.widget.url')--}}
-                                        {{--@elseif($col['type'] == 'state')--}}
-                                        {{--@include('builder.widget.state')--}}
-                                        {{--@else--}}
-                                        {{--@include('builder.widget.default')--}}
+                                    @elseif($col['type'] == 'url')
+                                        @include('builder.widget.url')
+                                    @elseif($col['type'] == 'state')
+                                        @include('builder.widget.state')
+                                    @else
+                                        @include('builder.widget.default')
                                     @endif
                                 @endforeach
 
