@@ -30,7 +30,8 @@
             $pathInfo = $request->path();
 
             if (!$request->ajax() && !in_array($pathInfo, [
-                    '/'
+                    '/',
+                    'auth/error'
                 ])
             ) {
 
@@ -49,12 +50,13 @@
                 $module = $this->moduleModel->getAll();
 
 
-
                 View::share('nodeName', $nodeName);
 
                 View::share('nodeData', $nodeData);
 
                 View::share('moduleName', NodeFunc::moduleName($pathInfo));
+
+                View::share('moduleTitle', NodeFunc::moduleTitle($pathInfo));
 
                 View::share('moduleData', $module);
 

@@ -91,7 +91,7 @@
             @section('sidebar')
                     <!-- Sidebar Brand -->
             <div id="sidebar-brand" class="themed-background">
-                <a href="/admin/index" class="sidebar-title">
+                <a href="/admin/system/index" class="sidebar-title">
                     <i class="fa fa-cube"></i> <span class="sidebar-nav-mini-hide">MyAdmin <strong>V1.0
                             Beta</strong></span>
                 </a>

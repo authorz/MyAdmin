@@ -14,68 +14,77 @@
             <!-- Simple Stats Widgets -->
             <div class="col-sm-6 col-lg-3">
                 <a href="javascript:void(0)" class="widget">
-                    <div class="widget-content widget-content-mini text-right clearfix">
-                        <div class="widget-icon pull-left themed-background">
-                            <i class="gi gi-cardio text-light-op"></i>
+                    <div class="widget-content widget-content-mini themed-background-dark-social">
+                        <span class="pull-right text-muted"></span>
+                        <strong class="text-light-op">管理员</strong>
+                    </div>
+                    <div class="widget-content themed-background-social clearfix">
+                        <div class="widget-icon pull-right">
+                            <i class="gi gi-airplane text-light-op"></i>
                         </div>
-                        <h2 class="widget-heading h3">
-                            <strong><span data-toggle="counter" data-to="2835"></span></strong>
-                        </h2>
-                        <span class="text-muted">SALES</span>
+                        <h2 class="widget-heading h3 text-light"><strong>10</strong></h2>
+                        <span class="text-light-op">管理员总数</span>
                     </div>
                 </a>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <a href="javascript:void(0)" class="widget">
-                    <div class="widget-content widget-content-mini text-right clearfix">
-                        <div class="widget-icon pull-left themed-background-success">
-                            <i class="gi gi-user text-light-op"></i>
+                    <div class="widget-content widget-content-mini themed-background-dark-flat">
+                        <span class="pull-right text-muted"></span>
+                        <strong class="text-light-op">节点</strong>
+                    </div>
+                    <div class="widget-content themed-background-flat clearfix">
+                        <div class="widget-icon pull-right">
+                            <i class="gi gi-albums text-light-op"></i>
                         </div>
-                        <h2 class="widget-heading h3 text-success">
-                            <strong>+ <span data-toggle="counter" data-to="2862"></span></strong>
-                        </h2>
-                        <span class="text-muted">NEW USERS</span>
+                        <h2 class="widget-heading h3 text-light"><strong>5</strong></h2>
+                        <span class="text-light-op">节点总数</span>
                     </div>
                 </a>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <a href="javascript:void(0)" class="widget">
-                    <div class="widget-content widget-content-mini text-right clearfix">
-                        <div class="widget-icon pull-left themed-background-warning">
-                            <i class="gi gi-briefcase text-light-op"></i>
+                    <div class="widget-content widget-content-mini themed-background-dark-creme">
+                        <span class="pull-right text-muted"></span>
+                        <strong class="text-light-op">角色</strong>
+                    </div>
+                    <div class="widget-content themed-background-creme clearfix">
+                        <div class="widget-icon pull-right">
+                            <i class="gi gi-wifi text-light-op"></i>
                         </div>
-                        <h2 class="widget-heading h3 text-warning">
-                            <strong>+ <span data-toggle="counter" data-to="75"></span></strong>
-                        </h2>
-                        <span class="text-muted">PROJECTS</span>
+                        <h2 class="widget-heading h3 text-light"><strong>15</strong></h2>
+                        <span class="text-light-op">角色总数</span>
                     </div>
                 </a>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <a href="javascript:void(0)" class="widget">
-                    <div class="widget-content widget-content-mini text-right clearfix">
-                        <div class="widget-icon pull-left themed-background-danger">
-                            <i class="gi gi-wallet text-light-op"></i>
+                    <div class="widget-content widget-content-mini themed-background-dark-amethyst">
+                        <span class="pull-right text-muted"></span>
+                        <strong class="text-light-op">模块</strong>
+                    </div>
+                    <div class="widget-content themed-background-amethyst clearfix">
+                        <div class="widget-icon pull-right">
+                            <i class="gi gi-video_hd text-light-op"></i>
                         </div>
-                        <h2 class="widget-heading h3 text-danger">
-                            <strong>$ <span data-toggle="counter" data-to="5820"></span></strong>
-                        </h2>
-                        <span class="text-muted">EARNINGS</span>
+                        <h2 class="widget-heading h3 text-light"><strong>25</strong></h2>
+                        <span class="text-light-op">模块总数</span>
                     </div>
                 </a>
             </div>
+
             <!-- END Simple Stats Widgets -->
         </div>
         <!-- END First Row -->
 
         <!-- Second Row -->
         <div class="row">
-            <div class="col-sm-6 col-lg-8">
+            <div class="col-sm-6 col-lg-9">
                 <!-- Chart Widget -->
                 <div class="widget">
                     <div class="widget-content border-bottom">
-                        <span class="pull-right text-muted">2013</span>
-                        Last Year's Data
+                        <span class="pull-right text-muted">2017</span>
+                        栏目数据信息
                     </div>
                     <div class="widget-content border-bottom themed-background-muted">
                         <!-- Flot Charts (initialized in js/pages/readyDashboard.js), for more examples you can check out http://www.flotcharts.org/ -->
@@ -85,18 +94,18 @@
                         <div class="row text-center">
                             <div class="col-xs-4 push-inner-top-bottom border-right">
                                 <h3 class="widget-heading"><i class="gi gi-wallet text-dark push-bit"></i> <br>
-                                    <small>$ 41k</small>
+                                    <small>列表总数:41</small>
                                 </h3>
                             </div>
                             <div class="col-xs-4 push-inner-top-bottom">
                                 <h3 class="widget-heading"><i class="gi gi-cardio text-dark push-bit"></i> <br>
-                                    <small>17k Sales</small>
+                                    <small>图片总数:34</small>
                                 </h3>
                             </div>
                             <div class="col-xs-4 push-inner-top-bottom border-left">
                                 <h3 class="widget-heading"><i
                                             class="gi gi-life_preserver text-dark push-bit"></i> <br>
-                                    <small>3k+ Tickets</small>
+                                    <small>软件总数:56</small>
                                 </h3>
                             </div>
                         </div>
@@ -104,19 +113,19 @@
                 </div>
                 <!-- END Chart Widget -->
             </div>
-            <div class="col-sm-6 col-lg-4">
+            <div class="col-sm-6 col-lg-3">
                 <!-- Stats User Widget -->
                 <a href="page_ready_profile.html" class="widget">
                     <div class="widget-content border-bottom text-dark">
-                        <span class="pull-right text-muted">This week</span>
-                        Featured Author
+                        <span class="pull-right text-muted"></span>
+                        个人信息
                     </div>
                     <div class="widget-content border-bottom text-center themed-background-muted">
                         <img src="/asstes/img/placeholders/avatars/avatar13@2x.jpg" alt="avatar"
                              class="img-circle img-thumbnail img-thumbnail-avatar-2x">
-                        <h2 class="widget-heading h3 text-dark">Anna Wigren</h2>
+                        <h2 class="widget-heading h3 text-dark">Admin</h2>
                                         <span class="text-muted">
-                                            <strong>Logo Designer</strong>, Sweden
+                                            <strong>首席执行官</strong>
                                         </span>
                     </div>
                     <div class="widget-content widget-content-full-top-bottom">
@@ -124,13 +133,13 @@
                             <div class="col-xs-6 push-inner-top-bottom border-right">
                                 <h3 class="widget-heading"><i class="gi gi-briefcase text-dark push-bit"></i>
                                     <br>
-                                    <small>35 Projects</small>
+                                    <small>查看权限</small>
                                 </h3>
                             </div>
                             <div class="col-xs-6 push-inner-top-bottom">
                                 <h3 class="widget-heading"><i class="gi gi-heart_empty text-dark push-bit"></i>
                                     <br>
-                                    <small>5.3k Likes</small>
+                                    <small>个人信息</small>
                                 </h3>
                             </div>
                         </div>
@@ -148,7 +157,7 @@
                                 </div>
                             </div>
                             <div class="widget-content text-dark text-center">
-                                <strong>98k</strong><br>Followers
+                                <strong>98</strong><br>字段
                             </div>
                         </a>
                     </div>
@@ -161,7 +170,7 @@
                             </div>
                             <div class="widget-content text-dark text-center">
                                 <strong>15</strong><br>
-                                Active Servers
+                                数据库
                             </div>
                         </a>
                     </div>

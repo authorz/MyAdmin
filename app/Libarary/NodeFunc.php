@@ -2,6 +2,7 @@
     namespace App\Libarary;
 
     use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\DB;
 
     class NodeFunc
     {
@@ -54,6 +55,24 @@
 
             if (count($path) > 0) {
                 return $path[0];
+            } else {
+                return '/';
+            }
+
+        }
+
+        public static function moduleTitle(string $path) : string
+        {
+            #preg_match_all('/[\/*.]+/', $path, $match);
+
+            $url = explode('/', $path);
+
+            $path = array_slice($url, 1, 1);
+
+            if (count($path) > 0) {
+                $title = DB::table('module')->where('ModuleName', '=', $path)->first();
+
+                return $title->Title;
             } else {
                 return '/';
             }

@@ -62,16 +62,7 @@
             <h2 class="text-muted animation-fadeInQuickInv"><em>非常抱歉，您没有操作权限</em></h2>
         </div>
         <div class="col-md-4 col-md-offset-4">
-            <form action="page_ready_search_results.html" method="post" class="push">
-                <div class="input-group input-group-lg">
-                    <input type="text" id="search-term" name="search-term" class="form-control"
-                           placeholder="Search AppUI..">
-                    <div class="input-group-btn">
-                        <button type="submit" class="btn btn-effect-ripple btn-primary"><i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
+
             <a href="javascript:window.history.go(-1);" class="btn btn-effect-ripple btn-default"><i
                         class="fa fa-arrow-left"></i>
                 返 回</a>

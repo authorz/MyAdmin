@@ -20,7 +20,7 @@
                 <div class="col-sm-6 hidden-xs">
                     <div class="header-section">
                         <ul class="breadcrumb breadcrumb-top">
-                            <li><a href="/admin/system/index">{{$moduleName}}</a></li>
+                            <li><a href="/admin/system/index">{{$moduleTitle}}</a></li>
                             <li><a href="/admin/system/index">控制台</a></li>
                             @foreach($NodeCrumb['Crumb'] as $key=>$value)
                                 <li>

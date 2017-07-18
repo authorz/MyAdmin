@@ -14,11 +14,11 @@
 
         public $timestamps = false;
 
-        public function getInfoListClass()
+        public function getInfoListClass($id)
         {
             $class = DB::table('infoclass')
                 ->select('Id', 'Title')
-                ->where('Type', '=', 2)
+                ->where('Type', '=', $id)
                 ->get();
 
             foreach ($class as $key => $value) {

@@ -87,12 +87,27 @@
             Route::get('infolist', 'InfoListController@index');
             Route::any('infolist/create', 'InfoListController@create');
             Route::any('infolist/edit', 'InfoListController@edit');
+            Route::any('infolist/delete', 'InfoListController@delete');
+            Route::any('infolist/check', 'InfoListController@check');
+            Route::any('infolist/destroy', 'InfoListController@destroy');
 
             #图片信息
             Route::get('infoimg', 'InfoImgController@index');
+            Route::any('infoimg/create', 'InfoImgController@create');
+            Route::any('infoimg/edit', 'InfoImgController@edit');
+            Route::any('infoimg/delete', 'InfoImgController@delete');
+            Route::any('infoimg/check', 'InfoImgController@check');
+            Route::any('infoimg/destroy', 'InfoImgController@destroy');
 
-            #文件信息
+            #软件信息
             Route::get('infofile', 'InfoFileController@index');
+            Route::any('infofile/create', 'InfoFileController@create');
+            Route::any('infofile/edit', 'InfoFileController@edit');
+            Route::any('infofile/delete', 'InfoFileController@delete');
+            Route::any('infofile/check', 'InfoFileController@check');
+            Route::any('infofile/destroy', 'InfoFileController@destroy');
+
+
             #自定义模型
             Route::get('diymodel', 'DiyModelController@index');
             Route::get('module', 'ModuleController@index');
