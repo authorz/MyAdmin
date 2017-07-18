@@ -5,10 +5,16 @@
 
     class BusinessRoute
     {
+        use System;
+
         const MODULE_NAME = 'Business';
 
         public static function _init()
         {
+
+            self::func();
+
+            self::config();
 
             Route::group(
                 [

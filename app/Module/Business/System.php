@@ -1,38 +1,11 @@
 <?php
     namespace App\Module\Business;
 
-    use App\Module\Business\BusinessRoute as Business;
     use Illuminate\Support\Facades\Storage;
 
 
-    class System
+    trait System
     {
-        const moduleName = "Business";
-
-        /**
-         * 初始化方法
-         *
-         * @return void
-         */
-        public static function _init()
-        {
-            self::route();
-
-            self::func();
-
-            self::config();
-        }
-
-        /**
-         * 获取模块路由
-         *
-         * @return void
-         */
-        public static function route()
-        {
-            Business::_init();
-        }
-
         /**
          * 加载自定义函数
          *
@@ -40,11 +13,11 @@
          */
         public static function func()
         {
-            $fileTree = Storage::disk('module')->files(self::moduleName . '/Func');
+            $fileTree = Storage::disk('module')->files(self::MODULE_NAME . '/Func');
 
             foreach ($fileTree as $value) {
 
-                $funcDir = __DIR__ . ltrim($value, self::moduleName);
+                $funcDir = __DIR__ . ltrim($value, self::MODULE_NAME);
 
                 require_once $funcDir;
             }
@@ -57,11 +30,11 @@
          */
         public static function config()
         {
-            $configTree = Storage::disk('module')->files(self::moduleName . '/Config');
+            $configTree = Storage::disk('module')->files(self::MODULE_NAME . '/Config');
 
             foreach ($configTree as $value) {
 
-                $configDir = __DIR__ . ltrim($value, self::moduleName);
+                $configDir = __DIR__ . ltrim($value, self::MODULE_NAME);
 
                 require_once $configDir;
             }
