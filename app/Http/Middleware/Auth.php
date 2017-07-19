@@ -35,29 +35,30 @@
                 return redirect('/');
             }
 
+            if (env('ADMIN_AUTH') == true) {
+                $path = explode('/', $request->path());
 
-            $path = explode('/', $request->path());
+                unset($path[0], $path[1]);
 
-            unset($path[0], $path[1]);
-
-            $path = implode('/', array_merge($path));
-
-
-            $authState = DB::table('user')
-                ->join('userroles', 'user.ID', '=', 'userroles.UserId')
-                ->join('roles', 'userroles.RoleId', '=', 'roles.ID')
-                ->join('rolepermissions', 'roles.ID', '=', 'rolepermissions.RoleId')
-                ->join('node', 'rolepermissions.PermissionID', '=', 'node.Id')
-                ->where('Name', $request->session()->get('UserLoginData.username'))
-                ->where('node.Href', $path)
-                ->count();
+                $path = implode('/', array_merge($path));
 
 
-            if ($authState === 0 && !in_array($request->path(), $NoAuth)) {
-                if ($request->ajax()) {
-                    return response()->json(['message' => '没有操作权限,请联系管理员', 'code' => 0]);
-                } else {
-                    return redirect('/auth/error');
+                $authState = DB::table('user')
+                    ->join('userroles', 'user.ID', '=', 'userroles.UserId')
+                    ->join('roles', 'userroles.RoleId', '=', 'roles.ID')
+                    ->join('rolepermissions', 'roles.ID', '=', 'rolepermissions.RoleId')
+                    ->join('node', 'rolepermissions.PermissionID', '=', 'node.Id')
+                    ->where('Name', $request->session()->get('UserLoginData.username'))
+                    ->where('node.Href', $path)
+                    ->count();
+
+
+                if ($authState === 0 && !in_array($request->path(), $NoAuth)) {
+                    if ($request->ajax()) {
+                        return response()->json(['message' => '没有操作权限,请联系管理员', 'code' => 0]);
+                    } else {
+                        return redirect('/auth/error');
+                    }
                 }
             }
 

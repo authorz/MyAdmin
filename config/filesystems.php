@@ -68,6 +68,11 @@ return [
             'root'=> app_path().'/Module',
         ],
 
+        'tpl'=>[
+            'driver'=>'local',
+            'root'=> app_path().'/Tpl',
+        ],
+
     ],
 
 ];

@@ -1,70 +1,121 @@
 <?php
     namespace App\Libarary;
 
-    use Illuminate\Console\Command;
+    use App\Console\Commands\moduleInterface;
     use Illuminate\Support\Facades\Storage;
-    use KHerGe\JSON\JSON;
 
     /**
      * Class CreateModule
      * @package App\Libarary
      */
-    class CreateModule
+    class CreateModule implements moduleInterface
     {
-        public function _init()
-        {
 
-        }
+        public $moduleName;
+
+        public $config;
 
         /**
-         * @param $moduleName
-         *
          * @summary 创建模块目录
          */
-        public function createDir($moduleName)
+        public function createDir()
         {
-            $moduleExists = Storage::disk('module')->exists($moduleName);
+            $moduleExists = Storage::disk('module')->exists($this->moduleName);
 
             if ($moduleExists) {
-                die('╯﹏╰ ' . $moduleName . ' module already exists');
+                die('╯﹏╰ ' . $this->moduleName . ' module already exists');
             } else {
-                $result = Storage::disk('module')->makeDirectory($moduleName);
+                $result = Storage::disk('module')->makeDirectory($this->moduleName);
                 return $result;
             }
         }
 
         /**
-         * @param $moduleName
-         *
-         * @summary 创建配置文件
-         * @return mixed
+         * @description 创建一个demo文件
+         * @return $this
          */
-        public function touchConfigJson($moduleName, $config)
+        public function createExampleFile()
         {
-            $json = new JSON();
+            $exampleTpl = preg_replace('/<{{moduleName}}>/', $this->moduleName, Storage::disk('tpl')->get('ExampleController.ma'));
 
-            $result = Storage::disk('module')->put($moduleName . '/config.json', $json->encode($config));
-
-            $this->touchRouteFile($moduleName);
-
-            return $result;
+            Storage::disk('module')->put($this->moduleName . '/' . 'Controller/ExampleController.php', $exampleTpl);
         }
 
-        public function touchRouteFile($moduleName)
+        /**
+         * @description 生成核心模块文件
+         * @return $this
+         */
+        public function touchModuleFile()
         {
-            Storage::disk('module')->put($moduleName . '/' . $moduleName . 'Route.php',"<?php
-    namespace App\\Module\\{$moduleName};
+            $routeTpl = preg_replace('/<{{moduleName}}>/', $this->moduleName, Storage::disk('tpl')->get('Route.ma'));
+            $routeTpl = preg_replace('/<{{modules}}>/', strtolower($this->moduleName), $routeTpl);
 
-    use Illuminate\\Support\\Facades\\Route;
+            Storage::disk('module')->put($this->moduleName . '/' . $this->moduleName . 'Route.php', $routeTpl);
 
-    class {$moduleName}Route
-    {
-        public static function _init()
-        {
+            $consoleTpl = preg_replace('/<{{moduleName}}>/', $this->moduleName, Storage::disk('tpl')->get('ConsoleController.ma'));
+
+            Storage::disk('module')->put($this->moduleName . '/' . 'ConsoleController.php', $consoleTpl);
+
+            $systemTpl = preg_replace('/<{{moduleName}}>/', $this->moduleName, Storage::disk('tpl')->get('System.ma'));
+
+            Storage::disk('module')->put($this->moduleName . '/' . 'System.php', $systemTpl);
 
         }
-    }
-            ");
+
+        /**
+         * @description 创建模块配置文件目录
+         * @return $this
+         */
+        public function createConfigDir()
+        {
+            Storage::disk('module')->makeDirectory($this->moduleName . '/Config');
+            Storage::disk('module')->put($this->moduleName . '/config.json', json_encode($this->config));
+
+            return $this;
+        }
+
+        /**
+         * @description 创建模块控制器目录
+         * @return $this
+         */
+        public function createControllerDir()
+        {
+            Storage::disk('module')->makeDirectory($this->moduleName . '/Controller');
+
+            return $this;
+        }
+
+        /**
+         * @description 创建模块自定义函数目录
+         * @return $this
+         */
+        public function createFuncDir()
+        {
+            Storage::disk('module')->makeDirectory($this->moduleName . '/Func');
+
+            return $this;
+        }
+
+        /**
+         * @description 创建模块自定义类目录
+         * @return $this
+         */
+        public function createLibararyDir()
+        {
+            Storage::disk('module')->makeDirectory($this->moduleName . '/Libarary');
+
+            return $this;
+        }
+
+        /**
+         * @description 创建模块自定义模型目录
+         * @return $this
+         */
+        public function createModelDir()
+        {
+            Storage::disk('module')->makeDirectory($this->moduleName . '/Model');
+
+            return $this;
         }
 
     }

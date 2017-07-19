@@ -53,10 +53,11 @@
         /**
          * Create a new command instance.
          *
-         * @return void
          *
          */
-        public function __construct(CreateModule $createModule)
+        public function __construct(
+            CreateModule $createModule
+        )
         {
             $this->moduleLib = $createModule;
 
@@ -106,34 +107,59 @@
          */
         private function askAll()
         {
+            /**
+             * 获取模块创建信息
+             */
             $this->askIntroduction();
             $this->askAuthor();
             $this->askVersion();
 
-
-            $result = $this->moduleLib->createDir($this->argument('moduleName'));
-
-            $result == true ? $this->line('Y(^_^)Y create successly') : $this->line('create error');
-
-            $result = $this->moduleLib->touchConfigJson($this->argument('moduleName'), [
-                'name' => $this->argument('moduleName'),
+            /**
+             * 初始化模块类
+             */
+            $this->moduleLib->moduleName = $this->argument('moduleName');
+            $this->moduleLib->config = [
+                'name' => &$this->moduleLib->moduleName,
                 'title' => $this->introduction,
                 'author' => $this->author,
                 'version' => $this->version,
                 'description' => '',
                 'icon' => ''
-            ]);
+            ];
 
-            $result == true ? $this->line('Y(^_^)Y create config successly') : $this->line('create error');
+            /**
+             * 创建模块需要的目录
+             */
+            $this->moduleLib->createDir();
+            $this->moduleLib->createConfigDir();
+            $this->moduleLib->createControllerDir();
+            $this->moduleLib->createFuncDir();
+            $this->moduleLib->createLibararyDir();
+            $this->moduleLib->createModelDir();
 
+            /**
+             * 创建核心配置文件
+             */
+            $this->moduleLib->touchModuleFile();
+
+            /**
+             * 创建一个demo文件
+             */
+            $this->moduleLib->createExampleFile();
+
+            /**
+             * 模块信息添加到数据库
+             */
             \App\Model\Module::create([
-                'name' => $this->argument('moduleName'),
+                'name' => &$this->moduleLib->moduleName,
                 'title' => $this->introduction,
                 'author' => $this->author,
                 'version' => $this->version,
                 'description' => '',
                 'icon' => ''
             ]);
+
+            $this->line('Y(^_^)Y create successly');
 
         }
 
