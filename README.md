@@ -27,6 +27,12 @@ DB_PASSWORD=root  //密码
 
 数据库详细配置见：https://docs.golaravel.com/docs/5.4/database/#configuration
 
+### 组件安装
+默认项目 vendor 不存在，请使用composer安装
+```shell
+composer install
+```
+
 
 ### 目录
 MyAdmin 基本保留Laravel原始目录结构
