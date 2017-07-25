@@ -30,6 +30,7 @@ DB_PASSWORD=root  //密码
 
 ### 目录
 MyAdmin 基本保留Laravel原始目录结构
+
 目录结构详细见：https://docs.golaravel.com/docs/5.4/structure/
 # 模块
 ### 创建模块
