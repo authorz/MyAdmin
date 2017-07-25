@@ -66,19 +66,40 @@ php artisan make:module <moduleName>
 ```shell
 php artisan moduleList  查看所有模块
 ```
-### 使用方式
-* 路由设定 : routes/module.php
-* 数据表规范 : myadmin_<模块名称>_物理名称
-* 链接其他库 : config/database.php 添加库
-* 所有文件命名空间 : ```namespace App\Module\<模块名称>;```
+### 加载
+在文件 routes\module.php 添加模块依赖
+
+```shell
+App\Module\<moduleName>\<moduleName>Route::_init();
+```
+
+### 其他
+* 模块显示 - 登录后顶部菜单内将会出现安装的模块
+* 模块功能 - 在系统->网站管理->节点管理中添加功能
+* 角色权限 - 使用的传统RBAC模式，需要在角色管理->编辑 操作
 
 
 # MyBuilder PHP 构建器
 使用手册：https://www.kancloud.cn/crazy/mybuilder/319170
 
 ### 在MyAdmin内使用
-```
-code ...
+```php
+<?php
+    namespace App\Module\TestA\Controller;
+
+    use App\Http\Controllers\Controller;
+
+    use App\Builder;
+
+    class ExampleController extends Controller
+    {
+        public function __invoke()
+        {
+            $builder = Builder\Builder::tables();
+
+            $builder->display();
+        }
+    }
 ```
 
 
