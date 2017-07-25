@@ -1,5 +1,5 @@
 # MyAdmin
-MyAdmin是一款基于Laravel 5.4开发的后台管理系统，系统采用模块式开发、安装，并内置MyBuilder构建器，快开发人员能把更多时间放在业务方面。进一步提升了开发质量和时间。
+MyAdmin是一款基于Laravel 5.4开发的后台管理系统，系统采用模块式开发、安装，并内置MyBuilder构建器，让开发人员能把更多时间放在业务方面。进一步提升了开发质量和时间。
 
 * 移植 - MyAdmin 支持其他后台管理系统的完美移植到本系统上。
 * 安装 - 依赖Laravel内置功能，安装简易
@@ -10,6 +10,10 @@ MyAdmin是一款基于Laravel 5.4开发的后台管理系统，系统采用模�
 # 安装
 
 ### 数据库
+复制一份 .env.example 并重命名为 .env
+```shell
+mv ./.env.example .env
+```
 数据库配置文件 /.env
 
 ```
@@ -25,9 +29,8 @@ DB_PASSWORD=root  //密码
 
 
 ### 目录
-```
-code ...
-```
+MyAdmin 基本保留Laravel原始目录结构
+目录结构详细见：https://docs.golaravel.com/docs/5.4/structure/
 # 模块
 ### 创建模块
 使用命令 artisan 创建：
