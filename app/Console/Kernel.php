@@ -13,7 +13,8 @@
          * @var array
          */
         protected $commands = [
-            Commands\module::class
+            Commands\module::class,
+            Commands\moduleList::class
         ];
 
         /**

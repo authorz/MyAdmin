@@ -3,6 +3,8 @@
     namespace App\Console\Commands;
 
     use App\Libarary\CreateModule;
+    use App\Libarary\Module\ListCommend;
+    use App\Libarary\Module\UnInstallCommend;
     use Illuminate\Console\Command;
 
 
@@ -13,14 +15,14 @@
          *
          * @var string
          */
-        protected $signature = 'create:module {moduleName}';
+        protected $signature = 'make:module {moduleName} {--build} {--install} {--zip} {--uninstall} {--check}';
 
         /**
          * The console command description.
          *
          * @var string
          */
-        protected $description = 'Create Module For MyAdmin';
+        protected $description = 'Create a new Module For MyAdmin';
 
         /**
          * 依赖注入模块创建类
@@ -51,9 +53,9 @@
         protected $version;
 
         /**
-         * Create a new command instance.
+         * module constructor.
          *
-         *
+         * @param CreateModule $createModule
          */
         public function __construct(
             CreateModule $createModule
@@ -71,6 +73,8 @@
          */
         public function handle()
         {
+            $this->_options();
+
             $isThisModule = $this->confirm('Is creating module is `' . $this->argument('moduleName') . '` ?  y/n');
 
             isset($isThisModule) ? $this->askAll() : $this->line('bye!');
@@ -163,5 +167,28 @@
 
         }
 
+        public function _options()
+        {
+            // 检查模块是否正常运行
+            $check = $this->option('check');
+            // 重新构建模块,修复错误
+            $build = $this->option('build');
+            // 安装模块
+            $install = $this->option('install');
+            // 卸载模块 - 自动打包
+            $uninstall = $this->option('uninstall');
+            // 打包模块
+            $zip = $this->option('zip');
+
+            if ($install && $uninstall) {
+                $this->line('Install and uninstall cannot be used at the same time');
+            }
+
+            if ($uninstall) {
+                UnInstallCommend::getModuleDataToDb($this->argument('moduleName'));
+            }
+
+
+        }
 
     }
