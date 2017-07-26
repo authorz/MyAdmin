@@ -94,7 +94,7 @@
          * @desc 面包屑链接组
          * @return array
          */
-        public function index() : array
+        public function index()
         {
             return array_merge([
                 [

@@ -181,8 +181,10 @@ return [
         App\Providers\CrumbServiceProvider::class,
 
         Spatie\Backup\BackupServiceProvider::class,
-        App\Providers\ModuleRouteServiceProvider::class
+        App\Providers\ModuleRouteServiceProvider::class,
         #Spatie\DbDumper\DbDumper::class,
+
+        App\Module\TestA\TestAServiceProvider::class
 
 
     ],
