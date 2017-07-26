@@ -275,6 +275,7 @@
 
             <!-- Page content -->
             @section('content')
+
             @show
                     <!-- END Page Content -->
         </div>

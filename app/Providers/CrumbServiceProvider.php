@@ -2,12 +2,10 @@
 
     namespace App\Providers;
 
-    use App\Libarary\NodeFunc;
-    use App\Model\Module;
-    use Illuminate\Http\Request;
+    use App\Libarary\Inter\CrumbInterface;
+
     use Illuminate\Support\Facades\View;
     use Illuminate\Support\ServiceProvider;
-    use App\Model\Node;
 
     class CrumbServiceProvider extends ServiceProvider
     {
@@ -16,45 +14,27 @@
          *
          * @return void
          */
-        public function boot(Request $request, Node $nodeModel, Module $module)
+        public function boot(CrumbInterface $crumbInterface)
         {
             error_reporting(0);
 
-            if ($request->path() != '/' && $request->path() != 'admin/index') {
+            if ($crumbInterface->init()) {
 
-                $moduleId = $module::where('ModuleName', NodeFunc::moduleName($request->path()))->value('Id');
+                View::share('crumb', ['data' => $crumbInterface->index()]);
 
-
-                $path = explode('/', $request->path());
-
-                unset($path[0], $path[1]);
-
-                $path = implode('/', array_merge($path));
-
-                $href = $nodeModel::where('Href', $path)->where('Module',$moduleId)->first();
-
-                $parentId = $nodeModel->getParentNode($href->Pid, 'Id', $moduleId);
-
-                $crumb = $nodeModel->getTreeNodeCrumb($href->Pid);
-
-                array_push($crumb, $href);
-
-                if (count($crumb) != 1) {
-                    $path = $crumb[1]->Href;
-                }
-
-
-                View::share('NodeCrumb', ['id' => $parentId, 'href' => $path, 'Crumb' => $crumb, 'moduleId' => $moduleId]);
             }
         }
 
         /**
-         * Register the application services.
-         *
-         * @return void
+         * @desc 注册面包屑导航解析类
          */
         public function register()
         {
-            //
+            $this->app->bind(
+                'App\Libarary\Inter\CrumbInterface',
+                'App\Libarary\Crumb\CrumbBasic'
+            );
         }
+
+
     }

@@ -24,12 +24,8 @@
                 <div class="col-sm-6 hidden-xs">
                     <div class="header-section">
                         <ul class="breadcrumb breadcrumb-top">
-                            <li><a href="/admin/system/index">{{$moduleName}}</a></li>
-                            <li><a href="/admin/system/index">控制台</a></li>
-                            @foreach($NodeCrumb['Crumb'] as $key=>$value)
-                                <li>
-                                    <a href="@if($value->Href) /{{$value->Href}} @else{{'javascript:;'}}@endif">{{$value->NodeName}}</a>
-                                </li>
+                            @foreach($crumb['data'] as $key=>$val)
+                                <li><a href="{{$val['url']}}">{{$val['name']}}</a></li>
                             @endforeach
                         </ul>
                     </div>
