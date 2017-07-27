@@ -60,6 +60,11 @@
 
             Storage::disk('module')->put($this->moduleName . '/' . 'System.php', $systemTpl);
 
+            $providerTpl = preg_replace('/<{{moduleName}}>/', $this->moduleName, Storage::disk('tpl')->get('ServiceProvider.ma'));
+
+            Storage::disk('module')->put($this->moduleName . '/' . $this->moduleName . 'ServiceProvider.php', $providerTpl);
+
+
         }
 
         /**

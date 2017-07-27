@@ -1,7 +1,18 @@
 <?php
-    /**
-     * Created by PhpStorm.
-     * User: crazy
-     * Date: 2017/7/26
-     * Time: 23:47
-     */
+    namespace App\Module\<{{moduleName}}>;
+
+    use Illuminate\Support\ServiceProvider;
+
+    class <{{moduleName}}>ServiceProvider extends ServiceProvider
+    {
+        public function boot()
+        {
+            $this->registerMigrations();
+        }
+
+        protected function registerMigrations()
+        {
+            $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
+        }
+
+    }
