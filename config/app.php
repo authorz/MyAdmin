@@ -184,7 +184,7 @@
             App\Providers\ModuleRouteServiceProvider::class,
             #Spatie\DbDumper\DbDumper::class,
 
-            App\Module\TestA\TestAServiceProvider::class
+
 
 
         ],

@@ -19,6 +19,7 @@
          */
         public function handle($request, Closure $next)
         {
+
             $NoAuth = [
                 'admin/system/index',
                 'admin/business/index',
